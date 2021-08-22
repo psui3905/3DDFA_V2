@@ -18,6 +18,7 @@ from utils.pose import viz_pose
 from utils.serialization import ser_to_ply, ser_to_obj
 from utils.functions import draw_landmarks, get_suffix
 from utils.tddfa_util import str2bool
+import numpy as np
 
 
 def main(args):
@@ -60,7 +61,7 @@ def main(args):
     wfp = f'examples/results/{args.img_fp.split("/")[-1].replace(old_suffix, "")}_{args.opt}' + new_suffix
 
     ver_lst = tddfa.recon_vers(param_lst, roi_box_lst, dense_flag=dense_flag)
-
+    print('ver_lst shape: {}'.format(np.array(ver_lst).shape))
     if args.opt == '2d_sparse':
         draw_landmarks(img, ver_lst, show_flag=args.show_flag, dense_flag=dense_flag, wfp=wfp)
     elif args.opt == '2d_dense':
